@@ -1,4 +1,4 @@
-package com.prof18.declarativeandroidhn.ui
+package com.prof18.declarativeandroidhn.ui.components
 
 import android.content.Context
 import androidx.compose.Composable
@@ -27,6 +27,10 @@ fun NewsList(newsList: List<News>, context: Context?) {
 @Composable
 fun DefaultPreview() {
     MaterialTheme {
-        NewsList(newsList = newsList.take(2), context = null)
+        NewsList(
+            newsList = newsList.take(
+                2
+            ), context = null
+        )
     }
 }
