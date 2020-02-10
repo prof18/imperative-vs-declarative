@@ -2,8 +2,10 @@ package com.prof18.declarativeandroidhn.ui.components
 
 import android.content.Context
 import androidx.compose.Composable
+import androidx.ui.core.dp
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.Column
+import androidx.ui.layout.Padding
 import androidx.ui.material.MaterialTheme
 import androidx.ui.tooling.preview.Preview
 import com.prof18.declarativeandroidhn.data.model.News
@@ -14,10 +16,12 @@ fun NewsList(newsList: List<News>, context: Context?) {
     VerticalScroller {
         Column {
             newsList.forEach {
-                NewsCard(
-                    news = it,
-                    context = context
-                )
+                Padding(padding = 8.dp) {
+                    NewsCard(
+                        news = it,
+                        context = context
+                    )
+                }
             }
         }
     }

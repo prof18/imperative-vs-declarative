@@ -6,20 +6,22 @@ import android.net.Uri
 import androidx.compose.Composable
 import androidx.ui.core.Text
 import androidx.ui.core.dp
+import androidx.ui.core.sp
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.layout.Column
-import androidx.ui.layout.Container
+import androidx.ui.layout.*
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.material.surface.Card
+import androidx.ui.text.TextStyle
+import androidx.ui.text.font.FontStyle
 import androidx.ui.tooling.preview.Preview
 import com.prof18.declarativeandroidhn.data.model.News
 import com.prof18.declarativeandroidhn.data.newsList
 
 @Composable
 fun NewsCard(news: News, context: Context?) {
-    Card(shape = RoundedCornerShape(16.dp)) {
+    Card(shape = RoundedCornerShape(16.dp), elevation = 8.dp) {
         Ripple(bounded = true) {
             Clickable(onClick = {
                 context?.startActivity(
@@ -30,9 +32,19 @@ fun NewsCard(news: News, context: Context?) {
                 )
             }) {
                 Container {
-                    Column {
-                        Text(news.title)
-                        Text(news.getStringTime())
+                    Column(ExpandedWidth wraps Spacing(16.dp)) {
+                        Text(
+                            text = news.title,
+                            style = TextStyle(fontSize = 18.sp)
+                        )
+                        HeightSpacer(height = 9.dp)
+                        Text(
+                            text = news.getStringTime(),
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                fontStyle = FontStyle.Italic
+                            )
+                        )
                     }
                 }
             }

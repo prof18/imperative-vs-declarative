@@ -14,17 +14,22 @@ class MainViewModel : ViewModel() {
     val appState = AppState(newsState = NewsState.Loading)
 
     fun loadData() {
-
         viewModelScope.launch {
+            appState.newsState = NewsState.Loading
             delay(2000)
-
-            appState.newsState = NewsState.Error("Random Error")
-
-            delay(2000)
-
             appState.newsState = NewsState.Success(newsList)
         }
     }
+
+    fun generateError() {
+        viewModelScope.launch {
+            delay(2000)
+            appState.newsState = NewsState.Error("This is a generated error only to try an error state")
+        }
+    }
+
+
+
 
 
 }

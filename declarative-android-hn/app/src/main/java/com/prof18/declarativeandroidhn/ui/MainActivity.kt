@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
                             }
                             is NewsState.Success -> {
                                 val successState = viewModel.appState.newsState as NewsState.Success
-
                                 NewsList(
                                     newsList = successState.news,
                                     context = this@MainActivity
@@ -48,19 +47,17 @@ class MainActivity : AppCompatActivity() {
                             }
                             is NewsState.Error -> {
                                 val errorState = viewModel.appState.newsState as NewsState.Error
-                                ErrorView(reason = errorState.reason)
+                                ErrorView(
+                                    reason = errorState.reason,
+                                    onRefreshClick = { viewModel.loadData() })
                             }
                         }
-
                     }
                 }
             }
         }
-
-        viewModel.loadData()
+        viewModel.generateError()
     }
-
-
 }
 
 
