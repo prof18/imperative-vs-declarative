@@ -24,12 +24,14 @@ fun NewsCard(news: News, context: Context?) {
     Card(shape = RoundedCornerShape(16.dp), elevation = 8.dp) {
         Ripple(bounded = true) {
             Clickable(onClick = {
-                context?.startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("http://www.google.com")
+                if (news.url != null) {
+                    context?.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(news.url)
+                        )
                     )
-                )
+                }
             }) {
                 Container {
                     Column(ExpandedWidth wraps Spacing(16.dp)) {
