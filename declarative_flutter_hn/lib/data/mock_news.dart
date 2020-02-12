@@ -2,15 +2,6 @@ import 'model/news.dart';
 
 List<News> newsList = [
   News(
-    by: "",
-    id: 0,
-    score: 0,
-    text: "",
-    time: 0,
-    title: "",
-    type: "",
-  ),
-  News(
       by: "ssklash",
       id: 22279051,
       score: 282,
