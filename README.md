@@ -1,6 +1,6 @@
 # Imperative vs Declarative
 
-A simple showcase app developed using declarative and imperative style
+A simple app to showcase declarative and imperative style.
 
 - Declarative Native Android
 - Imperative Native Android
