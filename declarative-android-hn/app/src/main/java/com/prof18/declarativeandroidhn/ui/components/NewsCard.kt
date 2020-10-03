@@ -1,55 +1,61 @@
 package com.prof18.declarativeandroidhn.ui.components
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.compose.Composable
-import androidx.ui.core.Text
-import androidx.ui.core.dp
-import androidx.ui.core.sp
-import androidx.ui.foundation.Clickable
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.layout.*
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.ripple.Ripple
-import androidx.ui.material.surface.Card
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontStyle
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ContextAmbient
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.prof18.declarativeandroidhn.data.model.News
 import com.prof18.declarativeandroidhn.data.newsList
 
 @Composable
-fun NewsCard(news: News, context: Context?) {
-    Card(shape = RoundedCornerShape(16.dp), elevation = 8.dp) {
-        Ripple(bounded = true) {
-            Clickable(onClick = {
+fun NewsCard(news: News) {
+    val context = ContextAmbient.current
+
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        elevation = 8.dp,
+        modifier = Modifier
+            .clickable(onClick = {
                 if (news.url != null) {
-                    context?.startActivity(
+                    context.startActivity(
                         Intent(
                             Intent.ACTION_VIEW,
                             Uri.parse(news.url)
                         )
                     )
                 }
-            }) {
-                Container {
-                    Column(ExpandedWidth wraps Spacing(16.dp)) {
-                        Text(
-                            text = news.title,
-                            style = TextStyle(fontSize = 18.sp)
-                        )
-                        HeightSpacer(height = 9.dp)
-                        Text(
-                            text = news.getStringTime(),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontStyle = FontStyle.Italic
-                            )
-                        )
-                    }
-                }
-            }
+            })
+            .padding(8.dp)
+            .fillMaxWidth()
+    ) {
+
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = news.title,
+                style = TextStyle(fontSize = 18.sp)
+            )
+            Spacer(Modifier.preferredHeight(9.dp))
+            Text(
+                text = news.getStringTime(),
+                style = TextStyle(
+                    fontSize = 14.sp,
+                    fontStyle = FontStyle.Italic
+                )
+            )
         }
     }
 }
@@ -59,8 +65,7 @@ fun NewsCard(news: News, context: Context?) {
 fun CardPreview() {
     MaterialTheme {
         NewsCard(
-            news = newsList[1],
-            context = null
+            news = newsList[1]
         )
     }
 }

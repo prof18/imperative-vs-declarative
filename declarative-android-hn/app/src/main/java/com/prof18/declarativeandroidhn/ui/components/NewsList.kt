@@ -1,29 +1,19 @@
 package com.prof18.declarativeandroidhn.ui.components
 
-import android.content.Context
-import androidx.compose.Composable
-import androidx.ui.core.dp
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.layout.Column
-import androidx.ui.layout.Padding
-import androidx.ui.material.MaterialTheme
+import androidx.compose.foundation.lazy.LazyColumnFor
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.ui.tooling.preview.Preview
 import com.prof18.declarativeandroidhn.data.model.News
 import com.prof18.declarativeandroidhn.data.newsList
 
 @Composable
-fun NewsList(newsList: List<News>, context: Context?) {
-    VerticalScroller {
-        Column {
-            newsList.forEach {
-                Padding(padding = 8.dp) {
-                    NewsCard(
-                        news = it,
-                        context = context
-                    )
-                }
-            }
-        }
+fun NewsList(newsList: List<News>) {
+
+    LazyColumnFor(items = newsList) {
+        NewsCard(
+            news = it
+        )
     }
 }
 
@@ -34,7 +24,7 @@ fun DefaultPreview() {
         NewsList(
             newsList = newsList.take(
                 2
-            ), context = null
+            )
         )
     }
 }

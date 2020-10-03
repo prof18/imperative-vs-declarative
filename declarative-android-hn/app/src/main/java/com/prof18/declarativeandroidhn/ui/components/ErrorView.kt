@@ -1,27 +1,32 @@
 package com.prof18.declarativeandroidhn.ui.components
 
-import androidx.compose.Composable
-import androidx.ui.core.Text
-import androidx.ui.core.dp
-import androidx.ui.layout.*
-import androidx.ui.material.Button
-import androidx.ui.material.Divider
-import androidx.ui.material.MaterialTheme
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
-import com.prof18.declarativeandroidhn.data.newsList
 
 @Composable
-fun ErrorView(reason: String, onRefreshClick: (() -> Unit)?) {
-    Center {
+fun ErrorView(reason: String, onRefreshClick: (() -> Unit) = {}) {
+    Box(
+        Modifier.fillMaxSize()
+    ) {
         Column(
-            modifier = Spacing(16.dp),
-            crossAxisAlignment = CrossAxisAlignment.Center
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(reason)
-            HeightSpacer(height = 16.dp)
+            Spacer(Modifier.preferredHeight(16.dp))
 
             Button(onClick = onRefreshClick) {
-                Text(text = "Refresh")
+                Text(
+                    text = "Refresh")
             }
         }
     }
@@ -31,6 +36,6 @@ fun ErrorView(reason: String, onRefreshClick: (() -> Unit)?) {
 @Composable
 fun ErrorViewPreview() {
     MaterialTheme {
-        ErrorView(reason = "Network Error", onRefreshClick = null)
+        ErrorView(reason = "Network Error")
     }
 }

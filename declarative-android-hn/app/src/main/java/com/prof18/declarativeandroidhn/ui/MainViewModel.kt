@@ -1,6 +1,7 @@
 package com.prof18.declarativeandroidhn.ui
 
-import android.os.Handler
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prof18.declarativeandroidhn.data.model.AppState
@@ -11,25 +12,27 @@ import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 
-    val appState = AppState(newsState = NewsState.Loading)
+    private val _appState = MutableLiveData<AppState>(AppState(NewsState.Loading))
+    val appState: LiveData<AppState>
+        get() = _appState
+
+    init {
+        generateError()
+    }
 
     fun loadData() {
         viewModelScope.launch {
-            appState.newsState = NewsState.Loading
+            _appState.value = AppState(NewsState.Loading)
             delay(2000)
-            appState.newsState = NewsState.Success(newsList)
+            _appState.value = AppState(NewsState.Success(newsList))
         }
     }
 
-    fun generateError() {
+    private fun generateError() {
         viewModelScope.launch {
             delay(2000)
-            appState.newsState = NewsState.Error("This is a generated error only to try an error state")
+            _appState.value =
+                AppState(NewsState.Error("This is a generated error only to try an error state"))
         }
     }
-
-
-
-
-
 }
