@@ -28,10 +28,6 @@ android {
     buildFeatures {
         compose true
     }
-//    composeOptions {
-//        kotlinCompilerVersion = "1.4.10"
-//        kotlinCompilerExtensionVersion = "1.0.0-beta03"
-//    }
 }
 
 dependencies {
