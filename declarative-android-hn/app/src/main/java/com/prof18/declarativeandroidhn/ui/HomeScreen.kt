@@ -1,13 +1,12 @@
 package com.prof18.declarativeandroidhn.ui
 
-import androidx.compose.foundation.Text
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.platform.ContextAmbient
-import androidx.compose.ui.viewinterop.viewModel
+import androidx.compose.ui.platform.LocalContext
 import com.prof18.declarativeandroidhn.R
 import com.prof18.declarativeandroidhn.data.model.NewsState
 import com.prof18.declarativeandroidhn.ui.components.ErrorView
@@ -15,11 +14,11 @@ import com.prof18.declarativeandroidhn.ui.components.LoadingView
 import com.prof18.declarativeandroidhn.ui.components.NewsList
 
 @Composable
-fun HomeScreen() {
-    val viewModel: MainViewModel = viewModel()
+fun HomeScreen(viewModel: MainViewModel) {
+
     val appState by viewModel.appState.observeAsState()
 
-    val context = ContextAmbient.current
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -31,7 +30,7 @@ fun HomeScreen() {
                 }
             )
         },
-        bodyContent = {
+        content = {
             when (appState?.newsState) {
                 NewsState.Loading -> {
                     LoadingView()
